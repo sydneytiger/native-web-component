@@ -10,10 +10,13 @@ class RwPoll extends HTMLElement {
 
     this._$quesiton = null;
     this._$answers = null;
+
+    // create shadow root
+    this._root = this.attachShadow({'mode': 'open'});
   }
 
   connectedCallback() {
-    this.innerHTML = `
+    this._root.innerHTML = `
       <style>
         .rw-poll-container {
           width:500px
@@ -45,8 +48,8 @@ class RwPoll extends HTMLElement {
       </div>
     `;
 
-    this._$quesiton = this.querySelector('#question');
-    this._$answers = this.querySelector('#answers');
+    this._$quesiton = this._root.querySelector('#question');
+    this._$answers = this._root.querySelector('#answers');
     this._$answers.addEventListener('click', e => {
       this._$answers.querySelectorAll('li').forEach(($li, index) => {
         if (e.target === $li) {
