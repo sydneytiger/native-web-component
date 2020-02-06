@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Html tempalte</title>
+  </head>
+  <body>
+    <ul>
+      <li>Give you the ability to create resusable segments of HTML within your apps</li>
+      <li>The &lttemplate&gt elment is not automatically rendered by the browser</li>
+      <li>Templates can be used to define markup for specific segments of an application and then rednerd on-the-fly as required</li>
+    </ul>
+
+    <template id="list-item">
+      <li>
+        <h3>title</h3>
+        <p>description</p>
+      </li>
+    </template>
+    <ul id="movie-list"></ul>
+
+    <script>
+      const items = [{
+        title: 'movie 1',
+        description: 'desc 1'
+        }, 
+        {
+        title: 'movie 2',
+        description: 'desc 2'
+        },
+        {
+        title: 'movie 3',
+        description: 'desc 3'
+        }];
+      const $template = document.querySelector('#list-item');
+      const $list = document.querySelector('#movie-list');
+
+      items.forEach(item => {
+        const $clone = document.importNode($template.content, true);
+        $clone.querySelector('h3').innerText = item.title;
+        $clone.querySelector('p').innerText = item.description;
+        $list.appendChild($clone);
+      });
+    </script>
+  </body>
+</html>

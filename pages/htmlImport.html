@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>HTML import</title>
+    <link rel="import" href="importingPage.html" id="importing-page">
+  </head>
+  <body>
+    <script>
+      const $link = document.querySelector('#importing-page');
+      const $content = $link.import.querySelector('.frame');
+      document.body.appendChild($content.cloneNode(true));
+    </script>
+  </body>
+</html>

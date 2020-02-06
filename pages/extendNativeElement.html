@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Extending native element</title>
+
+    <script>
+      class CustomeAnchor extends HTMLAnchorElement {
+        connectedCallback() {
+          this.addEventListener('click', e => {
+            e.preventDefault();
+            const result = confirm('Please confirm!');
+            if(result) {
+              window.location.href = e.target.href;
+            }
+          });
+        }
+
+        // constructor(){
+        //   super();
+        //   this.addEventListener('click', e => {
+        //   e.preventDefault();
+        //   const result = confirm('Please confirm!');
+        //   if(result) {
+        //     window.location.href = e.target.href;
+        //   }
+        // });
+        // }
+      }
+
+      // extending native element requires the third argument
+      window.customElements.define('custom-anchor', CustomeAnchor, { extends: 'a' });
+    </script>
+  </head>
+  <body>
+    <!-- use is attribute to specify a native element to become custom element -->
+    <a is="custom-anchor" href="http://www.google.com">Google</a>
+  </body>
+</html>

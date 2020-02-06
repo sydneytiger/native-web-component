@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Shadow dom</title>
+    <style>
+      p { color: red; }
+    </style>
+  </head>
+  <body>
+    <p>paragraph text in the outer application</p>
+    <div id="simple-div"></div>
+    <p>another paragraph text in outer application</p>
+    
+
+    <script>
+      const $div = document.querySelector('#simple-div');
+
+      $div.attachShadow({mode: 'open'});
+      $div.shadowRoot.innerHTML = `
+        <style>
+          p { color: blue; }
+        </style>
+        <p>paragraph text within shadow DOM</p>
+      `;
+    </script>
+  </body>
+</html>

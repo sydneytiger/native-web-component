@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pracetical guid to vanilla web component</title>
+    <script>
+
+      class myCustomElement extends HTMLElement {
+        constructor(){
+          super();
+          console.log('logging from my custom element');
+        }
+
+        connectedCallback() {
+          console.log('called when custom element is added to DOM!');
+        }
+
+        static get observedAttributes() {
+          return ['demo', 'test']
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+          console.log(`Attribute changed: name: ${name}, old value: ${oldValue}, new value: ${newValue}`);
+        }
+
+        disconnectedCallback() {
+          console.log('called when custom element is removed from DOM!');
+        }
+      }
+
+      // register the customer element to global object
+      window.customElements.define("my-custom-element", myCustomElement);
+    </script>
+  </head>
+  <body>
+    <script>
+      
+      setTimeout(() => {
+        let $el = document.createElement('my-custom-element');
+        document.body.appendChild($el);
+      }, 1000);
+
+      setTimeout(() => {
+        let $el = document.querySelector('my-custom-element');
+        $el.setAttribute('demo', '123');
+      }, 2000);
+
+      setTimeout(() => {
+        let $el = document.querySelector('my-custom-element');
+        $el.setAttribute('demo', '234');
+      }, 3000);
+
+      setTimeout(() => {
+        let $el = document.querySelector('my-custom-element');
+        $el.setAttribute('test', '234');
+      }, 3000);
+
+      setTimeout(() => {
+        let $el = document.querySelector('my-custom-element');
+        document.body.removeChild($el)
+      }, 4000);
+    </script>
+  </body>
+</html>
