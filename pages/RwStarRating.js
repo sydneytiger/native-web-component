@@ -17,7 +17,7 @@ class RwStarRating extends HTMLElement {
         :host {
           display: inline-block;
           overflow: hidden;
-          width: 4.1em;
+          width: 6em;
           height: 1em;
           user-select: none;
           vertical-align: middle;
@@ -100,6 +100,21 @@ class RwStarRating extends HTMLElement {
 
     this._disabled = (this.getAttribute('disabled') !== null);
     this._$top = this._root.querySelector('.top');
+    this._$bottom = this._root.querySelector('.bottom');
+
+    this._$bottom.addEventListener('click', event => {
+      const selectedValue = event.target.dataset.value;
+      if (!this._disabled && selectedValue && this._value !== selectedValue) {
+        this.value = selectedValue;
+        this.dispatchEvent(new Event('change'));
+      }
+    });
+
+    const initValue = this.getAttribute('value');
+    if (initValue) {
+      this.value = initValue;
+      this._render();
+    }
   }
 
   disconnectedCallback() {
@@ -118,7 +133,7 @@ class RwStarRating extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['disabled'];
+    return ['disabled', 'value'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -127,8 +142,10 @@ class RwStarRating extends HTMLElement {
         case 'disabled':
           this._disabled = (newValue !== null);
           break;
+        case 'value':
+          this.value = newValue;
+          break;
       }
-
     }
   }
 
