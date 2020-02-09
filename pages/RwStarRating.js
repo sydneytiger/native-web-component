@@ -111,14 +111,10 @@ class RwStarRating extends HTMLElement {
     });
 
     const initValue = this.getAttribute('value');
-    if (initValue) {
-      this.value = initValue;
+    if (initValue && !isNaN(initValue)) {
+      this._value = initValue;
       this._render();
     }
-  }
-
-  disconnectedCallback() {
-
   }
 
   get value() {
