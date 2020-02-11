@@ -52,8 +52,7 @@ class RwSlideMenu extends HTMLElement {
     }
 
     .container {
-      width: 80%;
-      max-width: 400px;
+      width: var(--menu-width, 80%);
       background: #fff;
       height: 100%;
       transform: translateX(-100%);
@@ -69,6 +68,8 @@ class RwSlideMenu extends HTMLElement {
       font-size: 1.5em;
       background-color: #f1f1f1;
       color: #666;
+
+      @apply --title-styles;
     }
 
     .title .title-content {

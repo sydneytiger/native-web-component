@@ -19,7 +19,16 @@
       .controls {
         width: 100%;
         text-align: right;
+      }
 
+      rw-slide-menu {
+        --menu-width: 50%;
+
+        --title-styles: {
+          background-color: orange;
+          color: white;
+          font-size: 1em;
+        }
       }
     </style>
   </head>
@@ -28,7 +37,7 @@
       <botton class="btn" id="openBtn">Open menu</botton>
       <botton class="btn" id="closeBtn">Close menu</botton>
     </div>
-    <rw-slide-menu theme="red" id="menu">
+    <rw-slide-menu id="menu">
       <h3 slot="title">Nav Menu</h3>
       <a href="#">list itme 1</a>
       <a href="#">list itme 2</a>
