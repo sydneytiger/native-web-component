@@ -4,8 +4,57 @@
     <meta charset="UTF-8">
     <title>Slide menu</title>
     <script src="./RwSlideMenu.js"></script>
+    <style>
+      .btn {
+        cursor: pointer;
+        margin: 30px;
+        padding: 20px;
+        font-size: 20px;
+        border: 1px solid maroon;
+        background-color: maroon;
+        border-radius: 10px;
+        color: #fff;
+      }
+
+      .controls {
+        width: 100%;
+        text-align: right;
+
+      }
+    </style>
   </head>
   <body>
-    <rw-slide-menu></rw-slide-menu>
+    <div class="controls">
+      <botton class="btn" id="openBtn">Open menu</botton>
+      <botton class="btn" id="closeBtn">Close menu</botton>
+    </div>
+    <rw-slide-menu theme="red" id="menu">
+      <h3 slot="title">Nav Menu</h3>
+      <a href="#">list itme 1</a>
+      <a href="#">list itme 2</a>
+      <a href="#">list itme 3</a>
+    </rw-slide-menu>
   </body>
 </html>
+<script>
+  const $openBtn = document.querySelector('#openBtn');
+  const $closeBtn = document.querySelector('#closeBtn');
+  const $menu = document.querySelector('#menu');
+  
+  $openBtn.addEventListener('click', e => {
+    $menu.open = true;
+  });
+
+  $closeBtn.addEventListener('click', e => {
+    $menu.open = false;
+  });
+
+  $menu.addEventListener('menu-opened', e => {
+    console.log('menu opened', e);
+  })
+
+  $menu.addEventListener('menu-closed', e => {
+    console.log('menu closed', e);
+  })
+
+</script>
